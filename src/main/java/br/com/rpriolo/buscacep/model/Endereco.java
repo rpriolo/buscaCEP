@@ -9,6 +9,15 @@ public class Endereco {
     private String estado;
     private String numero;
 
+    public Endereco(EnderecoViaCep enderecoViaCep) {
+        this.cep = enderecoViaCep.cep();
+        this.logradouro = enderecoViaCep.logradouro();
+        this.complemento = enderecoViaCep.complemento();
+        this.bairro = enderecoViaCep.bairro();
+        this.cidade = enderecoViaCep.localidade();
+        this.estado = enderecoViaCep.uf();
+    }
+
     public Endereco(EnderecoViaCep enderecoViaCep, String numero) {
         this.cep = enderecoViaCep.cep();
         this.logradouro = enderecoViaCep.logradouro();
@@ -33,14 +42,10 @@ public class Endereco {
     }
 
     public String toPrettyString() {
-        if (numero.isEmpty()) {
-            numero = "S/N";
-        }
-
         if (complemento.isEmpty()) {
-            return logradouro + ", " + numero + " - " + bairro + " - " + cidade + "/" + estado;
+            return logradouro + " - " + bairro + " - " + cidade + "/" + estado;
         } else {
-            return logradouro + ", " + numero + " (" + complemento + ") - " + bairro + " - " + cidade + "/" + estado;
+            return logradouro + " (" + complemento + ") - " + bairro + " - " + cidade + "/" + estado;
         }
     }
 }
