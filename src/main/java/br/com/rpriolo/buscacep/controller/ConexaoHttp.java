@@ -16,12 +16,15 @@ public class ConexaoHttp {
         this.url = "https://viacep.com.br/ws/" + cep + "/json/";
     }
 
-    public HttpResponse<String> montarConexao(String cep) {
+    public HttpResponse<String> montarConexao(String cep) throws Exception {
         setUrlConexao(cep);
         client = HttpClient.newHttpClient();
         request = HttpRequest.newBuilder(URI.create(this.url)).build();
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 200) {
+                throw new Exception("O CEP informado não está em um formato válido. Verifique se foi digitado um valor com 8 números no formato '00000-000' ou '00000000'.");
+            }
         } catch (IOException | InterruptedException e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);

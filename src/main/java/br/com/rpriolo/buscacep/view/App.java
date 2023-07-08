@@ -11,7 +11,7 @@ public class App {
 
     public static void main(String[] args) {
         String cep;
-        Endereco endereco;
+        Endereco endereco = null;
         int opcao;
 
         opcao = MenuPrincipal.exibirMenu();
@@ -20,15 +20,27 @@ public class App {
                 case 1:
                     System.out.print("Informe o CEP que deseja pesquisar: ");
                     cep = scanner.nextLine();
-                    endereco = Buscador.buscarEnderecoPorCep(cep);
-                    System.out.println(endereco.toPrettyString());
+                    try {
+                        endereco = Buscador.buscarEnderecoPorCep(cep);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    if (endereco != null) {
+                        System.out.println(endereco.toPrettyString());
+                    }
                     break;
                 case 2:
                     System.out.print("Informe o CEP que deseja o JSON: ");
                     cep = scanner.nextLine();
-                    endereco = Buscador.buscarEnderecoPorCep(cep);
-                    String json = Buscador.gerarJson(endereco);
-                    System.out.println(json);
+                    try {
+                        endereco = Buscador.buscarEnderecoPorCep(cep);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    if (endereco != null) {
+                        String json = Buscador.gerarJson(endereco);
+                        System.out.println(json);
+                    }
                     break;
                 default:
                     System.out.println("Opção inválida, tente novamente.");

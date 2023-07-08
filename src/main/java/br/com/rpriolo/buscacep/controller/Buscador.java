@@ -8,13 +8,17 @@ import com.google.gson.GsonBuilder;
 import java.net.http.HttpResponse;
 
 public class Buscador {
-    public static Endereco buscarEnderecoPorCep(String cep) {
+    public static Endereco buscarEnderecoPorCep(String cep) throws Exception {
         ConexaoHttp conexao = new ConexaoHttp();
-        HttpResponse<String> response = conexao.montarConexao(cep);
+        HttpResponse<String> response = null;
+        response = conexao.montarConexao(cep);
         String jsonString = response.body();
 
         Gson gson = new Gson();
         EnderecoViaCep enderecoViaCep = gson.fromJson(jsonString, EnderecoViaCep.class);
+        if (enderecoViaCep.cep() == null) {
+            throw new Exception("O CEP informado não existe.");
+        }
         return new Endereco(enderecoViaCep);
     }
 
