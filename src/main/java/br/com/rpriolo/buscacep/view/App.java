@@ -10,12 +10,13 @@ public class App {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String cep;
-        Endereco endereco = null;
         int opcao;
 
         opcao = MenuPrincipal.exibirMenu();
         while (opcao != 3) {
+            String cep = null;
+            Endereco endereco = null;
+
             switch (opcao) {
                 case 1:
                     System.out.print("Informe o CEP que deseja pesquisar: ");
