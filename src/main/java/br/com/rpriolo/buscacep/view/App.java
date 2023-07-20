@@ -15,7 +15,7 @@ public class App {
         opcao = MenuPrincipal.exibirMenu();
         while (opcao != 3) {
             String cep;
-            Endereco endereco = null;
+            Endereco endereco;
 
             switch (opcao) {
                 case 1:
@@ -23,11 +23,9 @@ public class App {
                     cep = scanner.nextLine();
                     try {
                         endereco = Buscador.buscarEnderecoPorCep(cep);
+                        System.out.println(endereco);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
-                    }
-                    if (endereco != null) {
-                        System.out.println(endereco);
                     }
                     break;
                 case 2:
@@ -35,12 +33,10 @@ public class App {
                     cep = scanner.nextLine();
                     try {
                         endereco = Buscador.buscarEnderecoPorCep(cep);
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-                    if (endereco != null) {
                         String json = Buscador.gerarJson(endereco);
                         System.out.println(json);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
                 default:
