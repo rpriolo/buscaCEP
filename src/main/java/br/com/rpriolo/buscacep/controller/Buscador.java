@@ -10,8 +10,7 @@ import java.net.http.HttpResponse;
 public class Buscador {
     public static Endereco buscarEnderecoPorCep(String cep) throws Exception {
         ConexaoHttp conexao = new ConexaoHttp();
-        HttpResponse<String> response = null;
-        response = conexao.montarConexao(cep);
+        HttpResponse<String> response = conexao.montarConexao(cep);
         String jsonString = response.body();
 
         Gson gson = new Gson();

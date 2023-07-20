@@ -14,7 +14,7 @@ public class App {
 
         opcao = MenuPrincipal.exibirMenu();
         while (opcao != 3) {
-            String cep = null;
+            String cep;
             Endereco endereco = null;
 
             switch (opcao) {
@@ -27,7 +27,7 @@ public class App {
                         System.out.println(e.getMessage());
                     }
                     if (endereco != null) {
-                        System.out.println(endereco.toPrettyString());
+                        System.out.println(endereco);
                     }
                     break;
                 case 2:
